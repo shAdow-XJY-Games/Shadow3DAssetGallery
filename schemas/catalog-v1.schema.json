@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shadow catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "collection",
+    "assets"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "sources": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/pinnedSource"
+      }
+    },
+    "collection": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "asset-v1.schema.json"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "repo",
+        "commit"
+      ],
+      "properties": {
+        "owner": {
+          "const": "shAdow-XJY-Games"
+        },
+        "repo": {
+          "enum": [
+            "Shadow3DAssetLibrary",
+            "Shadow3DAssetLibrary02"
+          ]
+        },
+        "commit": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "pinnedSource": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "properties": {
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "shadow-3d-asset-gallery",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Asset-free website and unified metadata entry for the Shadow 3D asset libraries",
+  "scripts": {
+    "test": "node --test gallery/*.test.mjs",
+    "check": "node gallery/build.mjs --check",
+    "serve": "python3 -m http.server 4173 --bind 0.0.0.0 --directory docs"
+  },
+  "engines": {"node": ">=22"}
+}

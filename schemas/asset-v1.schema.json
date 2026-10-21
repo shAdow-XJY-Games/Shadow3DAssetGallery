@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shAdow-XJY-Games/Shadow3DAssetGallery/blob/main/schemas/asset-v1.schema.json",
+  "title": "Shadow 3D asset v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "version",
+    "category",
+    "theme",
+    "style",
+    "title",
+    "bounds",
+    "triangles",
+    "materials",
+    "files",
+    "status",
+    "license",
+    "assetKind"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+[.][0-9]+[.][0-9]+$"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "theme": {
+      "type": "string",
+      "minLength": 1
+    },
+    "style": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "z",
+        "unit"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "y": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "z": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "const": "m"
+        }
+      }
+    },
+    "triangles": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "materials": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "prototype",
+        "review",
+        "verified"
+      ]
+    },
+    "license": {
+      "const": "All rights reserved"
+    },
+    "files": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "glb",
+        "blend",
+        "generator",
+        "render"
+      ],
+      "properties": {
+        "glb": {
+          "$ref": "#/$defs/file"
+        },
+        "blend": {
+          "$ref": "#/$defs/file"
+        },
+        "generator": {
+          "$ref": "#/$defs/file"
+        },
+        "render": {
+          "$ref": "#/$defs/file"
+        },
+        "reference": {
+          "$ref": "#/$defs/file"
+        }
+      }
+    },
+    "assetKind": {
+      "enum": [
+        "prop",
+        "modular",
+        "scene",
+        "character"
+      ]
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "size",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^assets/(?:(?:[A-Za-z0-9_-]+|v?[0-9]+[.][0-9]+[.][0-9]+)/)*[A-Za-z0-9_-]+[.][A-Za-z0-9]+$"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 26214400
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

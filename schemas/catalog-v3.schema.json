@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bounded immutable paged catalog root v3",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "format",
+    "snapshot",
+    "collection",
+    "assetCount",
+    "trees",
+    "metadataSource"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 3
+    },
+    "format": {
+      "const": "shadow-paged-catalog-1"
+    },
+    "snapshot": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "collection": {
+      "type": "object"
+    },
+    "assetCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "metadataSource": {
+      "type": "object",
+      "required": [
+        "owner",
+        "repo",
+        "commit"
+      ],
+      "properties": {
+        "owner": {
+          "const": "shAdow-XJY-Games"
+        },
+        "repo": {
+          "enum": [
+            "Shadow3DAssetGallery",
+            "Shadow3DAssetLibrary"
+          ]
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$",
+          "not": {
+            "const": "0000000000000000000000000000000000000000"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "trees": {
+      "type": "object",
+      "required": [
+        "records",
+        "terms",
+        "facets",
+        "sources"
+      ],
+      "properties": {
+        "records": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/descriptor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "terms": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/descriptor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "facets": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/descriptor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sources": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/descriptor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "descriptor": {
+      "type": "object",
+      "required": [
+        "path",
+        "size",
+        "sha256",
+        "min",
+        "max",
+        "count",
+        "height"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^catalog/v3/[a-f0-9]{2}/[a-f0-9]{64}\\.json$"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 262144
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "min": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "max": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "owner",
+        "repo",
+        "commit"
+      ],
+      "properties": {
+        "owner": {
+          "const": "shAdow-XJY-Games"
+        },
+        "repo": {
+          "enum": [
+            "Shadow3DAssetLibrary",
+            "Shadow3DAssetLibrary02"
+          ]
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$",
+          "not": {
+            "const": "0000000000000000000000000000000000000000"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$comment": "Root actual UTF-8 bytes <=16384. Descriptor hash/path prefix, typed ranges, root count/range, and all graph invariants are enforced by the runtime and offline audit; JSON Schema alone is insufficient."
+}
