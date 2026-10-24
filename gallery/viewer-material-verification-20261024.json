@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "browser": "Mozilla/5.0 (X11; Linux x86_64; rv:158.0) Gecko/20100101 Firefox/158.0",
+  "webglAvailable": true,
+  "samples": [
+    {
+      "id": "animal-static-single-hump-swept-neck-camel-01",
+      "materialBindingCount": 14,
+      "materialsUnchanged": true,
+      "idleDrawCallCount": 0,
+      "resize": true,
+      "reset": true
+    },
+    {
+      "id": "sports-fixed-ridged-blade-v-spliced-cricket-bat-01",
+      "materialBindingCount": 3,
+      "materialsUnchanged": true,
+      "idleDrawCallCount": 0,
+      "resize": true,
+      "reset": true
+    },
+    {
+      "id": "education-fixed-clamp-stem-and-prism-drawing-aid-01",
+      "materialBindingCount": 12,
+      "materialsUnchanged": true,
+      "idleDrawCallCount": 0,
+      "resize": true,
+      "reset": true
+    }
+  ],
+  "invalidHashRejected": true,
+  "disposeCanvasLeak": false,
+  "observedAt": "2026-10-24T14:06:12.025927+00:00",
+  "viewerSha256": "c4bbf7f87dfd0fde30e05f7592002af57c044c3eeced425b9b5092527f561aa3",
+  "scope": "Viewer presentation only; no asset geometry/material files changed. Three representative samples, not full-library revalidation.",
+  "manualChecks": {
+    "sampleImagesActuallyViewed": true,
+    "pointerOrbit": true,
+    "scrollZoom": true,
+    "resetAfterOrbitAndZoom": true
+  },
+  "limitations": [
+    "No pixel-identical Cycles claim",
+    "Camera and lighting differ from thumbnail",
+    "Cross-browser and low-end mobile performance not exhaustively tested"
+  ],
+  "changeSummary": [
+    "AgX display transform",
+    "Neutral procedural reflection environment",
+    "Balanced neutral key/fill illumination",
+    "Subtle PCF shadow receiver",
+    "Render on demand; dispose environment and shadow resources"
+  ],
+  "testHarnessNotes": [
+    "Initial prototype-render hook observed zero scenes; corrected to actual GLTFLoader parse outputs and WebGL draw calls.",
+    "Resize verification waits for actual measured target sizes, up to3 seconds, rather than assuming150ms is always enough."
+  ]
+}
