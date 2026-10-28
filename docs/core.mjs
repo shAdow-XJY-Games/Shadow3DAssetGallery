@@ -26,7 +26,7 @@ if(typeof a.id!=='string'||!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(a.id)||ids.has(a.i
  if(!['prototype','review','verified'].includes(a.status)||a.license!=='All rights reserved')throw Error('Invalid status or license');
  for(const role of ['glb','blend','generator','render'])if(!a.files?.[role])throw Error('Missing file');
  const ext={glb:/[.]glb$/,blend:/[.]blend$/,generator:/[.]py$/,render:/[.](png|jpg|jpeg|webp)$/,reference:/[.](png|jpg|jpeg|webp)$/};
- for(const [role,f] of Object.entries(a.files)){if(!f||!ext[role]?.test(f.path))throw Error('Invalid file role');const budget=role==='glb'?5242880:role==='render'||role==='reference'?2097152:role==='generator'?524288:26214400;if(f.size>budget)throw Error('File budget exceeded');rawURL(assetSource(c,a),f.path);if(!Number.isInteger(f.size)||f.size<1||f.size>26214400||!/^[a-f0-9]{64}$/.test(f.sha256))throw Error('Invalid file record');}
+ for(const [role,f] of Object.entries(a.files)){if(!f||!ext[role]?.test(f.path))throw Error('Invalid file role');const budget=role==='glb'?5242880:role==='render'||role==='reference'?2097152:role==='generator'?1048576:26214400;if(f.size>budget)throw Error('File budget exceeded');rawURL(assetSource(c,a),f.path);if(!Number.isInteger(f.size)||f.size<1||f.size>26214400||!/^[a-f0-9]{64}$/.test(f.sha256))throw Error('Invalid file record');}
  }return c;
 }
 
